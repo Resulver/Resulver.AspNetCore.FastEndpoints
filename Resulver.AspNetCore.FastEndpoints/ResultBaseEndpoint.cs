@@ -12,18 +12,16 @@ public abstract class ResultBaseEndpoint<TRequest> : Ep.Req<TRequest>.Res<Respon
     protected Task SendFromResultAsync(Result result, int statusCode, CancellationToken ct)
     {
         if (result.IsSuccess) return SendAsync(result.ToResponseTemplate(), 200, ct);
-        
+
         var failureResponse = ErrorResponseGenerator.MakeResponse(result.Errors[0]);
         AddError(failureResponse);
 
         return SendErrorsAsync(failureResponse.StatusCode, ct);
-
     }
 }
 
-public abstract class ResultBaseEndpoint<TRequest,TResponseContent> : Ep
-    .Req<TRequest>
-    .Res<ResponseTemplate<TResponseContent>>
+public abstract class
+    ResultBaseEndpoint<TRequest, TResponseContent> : Ep.Req<TRequest>.Res<ResponseTemplate<TResponseContent>>
     where TRequest : notnull
 {
     public required IErrorResponseGenerator<FailureResponse> ErrorResponseGenerator { get; init; }
@@ -31,11 +29,10 @@ public abstract class ResultBaseEndpoint<TRequest,TResponseContent> : Ep
     protected Task SendFromResultAsync(Result<TResponseContent> result, int statusCode, CancellationToken ct)
     {
         if (result.IsSuccess) return SendAsync(result.ToResponseTemplate(), 200, ct);
-        
+
         var failureResponse = ErrorResponseGenerator.MakeResponse(result.Errors[0]);
         AddError(failureResponse);
 
         return SendErrorsAsync(failureResponse.StatusCode, ct);
-
     }
 }
