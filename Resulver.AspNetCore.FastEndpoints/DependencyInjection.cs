@@ -6,6 +6,14 @@ namespace Resulver.AspNetCore.FastEndpoints;
 
 public static class DependencyInjection
 {
+    public static IServiceCollection AddResulver(this IServiceCollection services , params Assembly[] assemblies)
+    {
+        services.AddErrorResponseGenerator();
+        services.AddErrorProfilesFromAssembly(assemblies);
+        
+        return services;
+    }
+    
     public static IServiceCollection AddErrorProfile<TErrorProfile>(this IServiceCollection services)
         where TErrorProfile : ErrorProfile
     {
@@ -13,9 +21,14 @@ public static class DependencyInjection
     }
 
     public static IServiceCollection AddErrorProfilesFromAssembly(
-        this IServiceCollection services, Assembly assembly)
+        this IServiceCollection services,params Assembly[] assemblies)
     {
-        return services.AddErrorProfilesFromAssembly<FailureResponse>(assembly);
+        foreach (var assembly in assemblies)
+        {
+            services.AddErrorProfilesFromAssembly<FailureResponse>(assembly);
+        }
+        
+        return services;
     }
 
     public static IServiceCollection AddErrorResponseGenerator(this IServiceCollection services)

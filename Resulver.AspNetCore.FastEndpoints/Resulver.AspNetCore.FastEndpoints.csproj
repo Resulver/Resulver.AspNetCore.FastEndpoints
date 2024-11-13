@@ -4,12 +4,34 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Version>2.0.0</Version>
+        <Title>Resulver.AspNetCore.FastEndpoints</Title>
+        <Description>Clean implementation of Result Pattern and error handling for Asp Core Web API applications</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>ResulverIcon.png</PackageIcon>
+        <PackageTags>FastEndpoints;api;asp;resulver</PackageTags>
+        <PackageLicenseFile>LICENCE</PackageLicenseFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FastEndpoints" Version="5.31.0"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0"/>
-        <PackageReference Include="Resulver.AspNetCore.Core" Version="2.0.1"/>
+      <None Include="..\LICENCE">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\ResulverIcon.png">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FastEndpoints" Version="5.31.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Resulver.AspNetCore.Core" Version="2.0.1" />
     </ItemGroup>
 
 </Project>
