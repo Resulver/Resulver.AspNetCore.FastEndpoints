@@ -11,6 +11,7 @@
         <PackageIcon>ResulverIcon.png</PackageIcon>
         <PackageTags>FastEndpoints;api;asp;resulver</PackageTags>
         <PackageLicenseFile>LICENCE</PackageLicenseFile>
+        <RepositoryUrl>https://github.com/Resulver/Resulver.AspNetCore.FastEndpoints</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
