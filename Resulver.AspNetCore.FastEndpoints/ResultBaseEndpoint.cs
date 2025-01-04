@@ -9,14 +9,20 @@ public abstract class ResultBaseEndpoint<TRequest> : Ep.Req<TRequest>.Res<Respon
 {
     public required IErrorResponseGenerator<FailureResponse> ErrorResponseGenerator { get; init; }
 
-    protected Task SendFromResultAsync(Result result, int statusCode, CancellationToken ct)
+    protected Task SendResultErrorAsync(ResultError error, CancellationToken ct)
     {
-        if (result.IsSuccess) return SendAsync(result.ToResponseTemplate(), 200, ct);
+        var failureResponse = ErrorResponseGenerator.MakeResponse(error);
 
-        var failureResponse = ErrorResponseGenerator.MakeResponse(result.Errors[0]);
         AddError(failureResponse);
 
         return SendErrorsAsync(failureResponse.StatusCode, ct);
+    }
+
+    protected Task SendFromResultAsync(Result result, int statusCode, CancellationToken ct)
+    {
+        return result.IsSuccess
+            ? SendAsync(result.ToResponseTemplate(), 200, ct)
+            : SendResultErrorAsync(result.Errors[0], ct);
     }
 }
 
@@ -26,13 +32,19 @@ public abstract class
 {
     public required IErrorResponseGenerator<FailureResponse> ErrorResponseGenerator { get; init; }
 
-    protected Task SendFromResultAsync(Result<TResponseContent> result, int statusCode, CancellationToken ct)
+    protected Task SendResultErrorAsync(ResultError error, CancellationToken ct)
     {
-        if (result.IsSuccess) return SendAsync(result.ToResponseTemplate(), 200, ct);
+        var failureResponse = ErrorResponseGenerator.MakeResponse(error);
 
-        var failureResponse = ErrorResponseGenerator.MakeResponse(result.Errors[0]);
         AddError(failureResponse);
 
         return SendErrorsAsync(failureResponse.StatusCode, ct);
+    }
+
+    protected Task SendFromResultAsync(Result<TResponseContent> result, int statusCode, CancellationToken ct)
+    {
+        return result.IsSuccess
+            ? SendAsync(result.ToResponseTemplate(), 200, ct)
+            : SendResultErrorAsync(result.Errors[0], ct);
     }
 }
