@@ -8,7 +8,9 @@ public class ErrorResponseHandler : ErrorResponseHandler<FailureResponse>
     {
         Handler = e => new FailureResponse
         {
-            StatusCode = StatusCode, PropertyName = e.Title, ErrorMessage = e.Message
+            StatusCode = StatusCode,
+            PropertyName = e.Title ?? "",
+            ErrorMessage = e.Message
         };
 
         ErrorType = errorType;
