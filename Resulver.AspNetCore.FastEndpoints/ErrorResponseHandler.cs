@@ -9,7 +9,7 @@ public class ErrorResponseHandler : ErrorResponseHandler<FailureResponse>
         Handler = e => new FailureResponse
         {
             StatusCode = StatusCode,
-            PropertyName = e.Title ?? "",
+            PropertyName = e.Title ?? e.GetType().Name,
             ErrorMessage = e.Message
         };
 
