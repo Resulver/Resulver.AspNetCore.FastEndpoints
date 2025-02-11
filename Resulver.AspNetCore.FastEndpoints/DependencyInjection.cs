@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Resulver.AspNetCore.Core;
 
@@ -17,7 +18,7 @@ public static class DependencyInjection
     public static IServiceCollection AddErrorProfile<TErrorProfile>(this IServiceCollection services)
         where TErrorProfile : ErrorProfile
     {
-        return services.AddErrorProfile<TErrorProfile, FailureResponse>();
+        return services.AddErrorProfile<TErrorProfile, IResult>();
     }
 
     public static IServiceCollection AddErrorProfilesFromAssembly(
@@ -25,7 +26,7 @@ public static class DependencyInjection
     {
         foreach (var assembly in assemblies)
         {
-            services.AddErrorProfilesFromAssembly<FailureResponse>(assembly);
+            services.AddErrorProfilesFromAssembly<IResult>(assembly);
         }
         
         return services;
@@ -33,7 +34,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddErrorResponseGenerator(this IServiceCollection services)
     {
-        services.AddErrorResponseGenerator<FailureResponse>();
+        services.AddErrorResponseGenerator<IResult>();
         return services;
     }
 }
