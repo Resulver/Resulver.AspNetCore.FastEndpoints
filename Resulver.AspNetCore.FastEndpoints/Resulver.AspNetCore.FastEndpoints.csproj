@@ -4,7 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>9.1.0</Version>
+        <Version>9.1.1</Version>
         <Title>Resulver.AspNetCore.FastEndpoints</Title>
         <Description>Clean implementation of Result Pattern and error handling for Asp Core Web API applications</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -30,9 +30,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="FastEndpoints" Version="5.33.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
-        <PackageReference Include="Resulver.AspNetCore.Core" Version="9.0.0" />
+        <PackageReference Include="FastEndpoints" Version="5.34.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+        <PackageReference Include="Resulver.AspNetCore.Core" Version="9.0.1" />
     </ItemGroup>
 
 </Project>
