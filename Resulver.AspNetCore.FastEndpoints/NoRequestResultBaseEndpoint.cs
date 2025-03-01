@@ -5,13 +5,10 @@ using Resulver.AspNetCore.Core.Response;
 
 namespace Resulver.AspNetCore.FastEndpoints;
 
-
-
-public abstract class ResultBaseEndpoint<TRequest> : Ep.Req<TRequest>.Res<ResponseTemplate>
-    where TRequest : notnull
+public abstract class NoRequestResultBaseEndpoint : Ep.NoReq.Res<ResponseTemplate>
 {
     public required IErrorResponseGenerator<IResult> ErrorResponseGenerator { get; init; }
-    
+
     protected Task SendResultErrorAsync(ResultError error, CancellationToken ct)
     {
         var failureResponse = ErrorResponseGenerator.MakeResponse(error);
@@ -27,9 +24,7 @@ public abstract class ResultBaseEndpoint<TRequest> : Ep.Req<TRequest>.Res<Respon
     }
 }
 
-public abstract class
-    ResultBaseEndpoint<TRequest, TResponseContent> : Ep.Req<TRequest>.Res<ResponseTemplate<TResponseContent>>
-    where TRequest : notnull
+public abstract class NoRequestResultBaseEndpoint<TResponseContent> : Ep.NoReq.Res<ResponseTemplate<TResponseContent>>
 {
     public required IErrorResponseGenerator<IResult> ErrorResponseGenerator { get; init; }
 
